@@ -7,8 +7,8 @@
  * 
  */
 
-// let baseUrl = '/api'; 
-let baseUrl = '';
+let baseUrl = '/api'; 
+// let baseUrl = '';
 let routerMode = 'history';
 let imgBaseUrl = 'http://images.cangdu.org/';
 let standardOrderUUID = "af217f115db650685776e1267552b169";
