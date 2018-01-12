@@ -1,9 +1,5 @@
 import { resolve } from "url";
 
-import {
-	baseUrl
-} from './env'
-
 function getData(data){
 	var arr = [];
 	if(data == null){
@@ -19,7 +15,7 @@ function getData(data){
 }
 export default async function ajax(obj){
     obj = obj || {};
-    let _url = baseUrl + obj.url;
+    let _url = obj.url;
 	obj.type = (obj.type || 'POST').toUpperCase();
 	obj.async = obj.async || true;
 	obj.dataType = obj.dataType || 'json';

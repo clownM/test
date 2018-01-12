@@ -33,14 +33,27 @@
                                 <!-- 全部/待扫描 -->
                                 <div class="order" v-for="(order,index) in toscan_array">
                                     <div class="order-header">
-                                        <div></div>
-                                        <div class="status" v-text="order.status"></div>
+                                        <span class="orderno">订单编号: {{order.orderuuid}}</span>
+                                        <span class="status">{{ order.status }}</span>
                                     </div>
                                     <div class="order-body">
-                                        <div class="orderno">订单编号：
-                                            <span v-text="order.orderuuid"></span>
+                                        <div class="glass_pic">
+                                            <img src="" alt="">
                                         </div>
-                                        <div class="createdate">订单创建时间:
+                                        <div class="info">
+                                            <div class="alia">
+                                                <p class="alia">F157633</p>
+                                                <p class="name">圆形复古镜框眼镜</p>
+                                            </div>
+                                            <div class="kezi">
+                                                <p>镜腿刻字</p>
+                                                <p>镜框整体定制</p>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span>￥890.00</span>
+                                        </div>
+                                        <!-- <div class="createdate">订单创建时间:
                                             <span v-text="order.createdate"></span>
                                         </div>
                                         <div class="station">预约扫描地址：
@@ -48,45 +61,51 @@
                                         </div>
                                         <div class="appointmentdate">预约扫描时间：
                                             <span v-text="order.appointmentdate"></span>
-                                        </div>
+                                        </div> -->
+                                    </div>
+                                    <div class="order-footer-price">
+                                        <span>共一件商品 合计：￥890.00（含运费：￥0.00）</span>
                                     </div>
                                     <div class="order-footer">
-                                        <button class="cancelOrder" @click='cancel(order.orderuuid)'>取消预约</button>
+                                        <button class="cancelOrder" @click='cancel(order.orderuuid)'>取消订单</button>
                                     </div>
                                 </div>
                                 <!--  全部/待支付-->
                                 <div class="order" v-for="(deal,index) in topay_array">
                                     <div class="order-header">
-                                        <div></div>
-                                        <div class="status" v-text="deal.status"></div>
+                                        <span class="orderno">订单编号: {{order.orderuuid}}</span>
+                                        <span class="status">{{ order.status }}</span>
                                     </div>
                                     <div class="order-body">
-                                        <div class="orderuuid">orderuuid
-                                            <span v-text="deal.orderuuid"></span>
+                                        <div class="glass_pic">
+                                            <img src="" alt="">
                                         </div>
-                                        <div class="dealuuid">dealuuid:
-                                            <span v-text="deal.dealuuid"></span>
+                                        <div class="info">
+                                            <div class="alia">
+                                                <p class="alia">F157633</p>
+                                                <p class="name">圆形复古镜框眼镜</p>
+                                            </div>
+                                            <div class="kezi">
+                                                <p>镜腿刻字</p>
+                                                <p>镜框整体定制</p>
+                                            </div>
                                         </div>
-                                        <div class="createdate">order创建时间:
-                                            <span v-text="deal.orderCreatedate"></span>
+                                        <div class="price">
+                                            <span>￥{{deal.price}}</span>
+                                        </div>
+                                        <!-- <div class="createdate">订单创建时间:
+                                            <span v-text="order.createdate"></span>
                                         </div>
                                         <div class="station">预约扫描地址：
-                                            <span v-text="deal.station"></span>
+                                            <span v-text="order.station"></span>
                                         </div>
                                         <div class="appointmentdate">预约扫描时间：
-                                            <span v-text="deal.appointmentdate"></span>
-                                        </div>
-                                        <div class="scandate">实际扫描时间：
-                                            <span v-text="deal.scandate"></span>
-                                        </div>
-                                        <div class="dealCreatedate">deal创建时间：
-                                            <span v-text="deal.dealCreatedate"></span>
-                                        </div>
-                                        <div class="price" v-text="'合计： ￥ '+deal.price"></div>
+                                            <span v-text="order.appointmentdate"></span>
+                                        </div> -->
                                     </div>
                                     <div class="order-footer">
-                                        <button class="">付款</button>
-                                        <button class="to_order_details" @click="toOrderDetails(deal.orderuuid,deal.dealuuid)">订单详情</button>
+                                        <button class="cancelOrder" @click='cancel(order.orderuuid)'>取消订单</button>
+                                        <button>立即付款</button>
                                     </div>
                                 </div>
                                 <!-- 全部/生产中 -->
@@ -576,6 +595,7 @@ export default {
         top: 88px;
         padding-left: 23px;
         padding-right: 23px;
+        border-top: 2px solid rgb(242, 242, 242);
         ul{
             display: flex;
             justify-content: space-between;
@@ -593,75 +613,96 @@ export default {
     }
     .tabs-contents{
         display: none;
-        top: 158px;
-        height: 3000px;
-        padding-top: 158px;
+        top: 170px;
+        // padding-top: 158px;
         // background-color: rgb(100, 100, 100);
     }
 }
 
 .tabs-head ul li span:hover,
 .tabs-head ul li span.active {
-  border-bottom: 3px solid rgb(73, 144, 238);
+    border-bottom: 3px solid rgb(73, 144, 238);
 }
 
 .tabs-body > div.active {
-  display: block;
+    display: block;
 }
 
 .tabs-contents .order {
-  margin-bottom: 10px;
-  border-top: 1px solid rgb(240, 240, 240);
-  border-bottom: 1px solid rgb(240, 240, 240);
-  background-color: #fff;
+    margin-bottom: 20px;
+    background-color: #fff;
 }
 
 .order .order-header {
-  width: 100%;
-  height: 40px;
-  margin-left: 0;
-  line-height: 40px;
-  background-color: rgb(11, 227, 253);
-  display: flex;
-  justify-content: space-between;
-  padding-left: 10px;
-  padding-right: 10px;
+    width: 100%;
+    height: 88px;
+    line-height: 88px;
+    // display: flex;
+    // justify-content: space-between;
+    padding-left: 46px;
+    padding-right: 46px;
+    border-bottom: 2px solid rgb(242, 242, 242);
 }
 
 .order .order-body {
-  width: 100%;
-  min-height: 25px;
-  padding-left: 10px;
-  padding-right: 10px;
+    padding-left: 46px;
+    padding-right: 46px;
+    display: flex;
+    .glass-pic{
+        width: 182px;
+        height: 182px;
+        margin-right: 28px;
+    }
+    .info{
+        flex:1;
+        display: flex;
+        flex-direction: vertical;
+        justify-content: space-between;
+        .alia{
+            flex:1;
+        }
+        .kezi{
+            flex:1;
+        }
+    }
+    .price{
+        flex:1;
+        font-size: 30px;
+        color:rgb(248, 92, 92);
+    }
 }
-.order .order-body > div {
-  min-height: 25px;
-  line-height: 25px;
+.order .order-footer-price{
+    height: 90px;
+    line-height: 90px;
+    padding-right: 46px;
+    float:right;
+    font-size: 24px;
 }
-.order .order-body > div > span {
-  word-wrap: break-word;
-}
-
 .order .order-footer {
-  width: 100%;
-  height: 40px;
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 10px;
-  border-top: 1px solid #ccc;
-}
-.order .order-footer button {
-  width: 80px;
-  height: 30px;
-  margin-top: 5px;
-  border-radius: 15px;
-  border: none;
-  background-color: rgb(255, 79, 79);
-  color: white;
-  margin-right: 5px;
-}
-.order .order-footer button:last-child {
-  margin-right: 0;
+    width: 100%;
+    height: 120px;
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 46px;
+    border-top: 1px solid #ccc;
+    font-size: 30px;    
+    // font-family: "NotoSansHans-Light";
+    button{
+        width: 200px;
+        height: 68px;
+        margin-top: 26px;
+        border: none;
+        margin-left: 11px;
+    }
+    button:nth-child(even){
+        background-color: rgb(73, 144, 238);
+        color:rgb(255, 255, 255);
+    }
+    button:nth-child(odd){
+        background-color: rgb(255, 255, 255);
+        border: 1px solid rgb(73, 144, 238);
+        color:rgb(73, 144, 238);
+    }
 }
 .failorder {
     position: fixed;
