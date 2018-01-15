@@ -1,7 +1,10 @@
 
-import {loadConfigData,loadParamsData} from '../service/getData'
+import {loadConfigData,loadParamsData,fetchGlassTypeByConfig,fetchAllConfig,listFrameProfiles,queryFrameProfiles} from '../service/getData'
 import $ from 'jquery'
 import ajax from './ajax';
+import Vue from 'vue';
+import vueResource from 'vue-resource';
+import {baseUrl,standardOrderUUID} from '../config/env'
 
 //RFC2822格式 日期格式化
 export const joinzero = (num) => {
@@ -279,3 +282,49 @@ export const Config2Json = (config) => {
     return config_json;
 }
 
+
+export const glassTypeGenobjMap = async() => {
+    let res = await fetchAllConfig();
+    console.log(res);
+    let glass_type_genobj_map = {};
+    for (let idx in res.config) {
+        let config_uuid = res.config[idx];
+        let url2 = baseUrl+"/data?action=download&uuid="+config_uuid+"&type=config";
+        Vue.http.get(url2).then(response => {
+            let config_json = Config2Json(response.data);
+            let glass_type = config_json.LensProfileIdentifier;
+            glass_type_genobj_map[glass_type] = res.genobj[idx];
+        },response => {
+            console.warn(response)
+        })
+    }
+    return glass_type_genobj_map;
+}
+
+export const getFramesObj = async() => {
+
+    let frames_obj = [];
+    let list_frame_profiles = await listFrameProfiles();
+    let frame_profiles_uuid = list_frame_profiles.list[0];
+    let res = await queryFrameProfiles(frame_profiles_uuid);
+    let frame_profiles = res.description.frame_profiles;
+    let glass_type_genobj_map = await glassTypeGenobjMap();
+    
+    for(let key in frame_profiles.data){
+        let val = frame_profiles.data[key];
+        console.log(val);
+        
+        let frame_uuid = glass_type_genobj_map[val];
+        console.log(glass_type_genobj_map);
+        console.log(glass_type_genobj_map.val);
+        
+        console.log(frame_uuid);
+        
+        frames_obj[frame_uuid] = {
+            "alias":frame_profiles.alias[key],
+            "material":frame_profiles.material[key],
+            "frame_type":frame_profiles.data[key]
+        };
+    }
+    return frames_obj;
+}

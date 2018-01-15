@@ -1,9 +1,7 @@
 
 import {getCookie} from '../config/utils';
-import {Config2Json} from '../config/fswear'
+// import {Config2Json} from '../config/fswear'
 import ajax from '../config/ajax';
-import Vue from 'vue'
-import vueResource from 'vue-resource';
 import {baseUrl,standardOrderUUID} from '../config/env'
 
 /**
@@ -206,28 +204,22 @@ export const queryFrameProfiles = (uuid) => ajax({
 	}
 })
 
-export const fetchGlassTypeByConfig = (config_uuid) => {
-	let url = baseUrl+"/data?action=download&uuid="+config_uuid+"&type=config";
-	Vue.http.get(url).then(response => {
-		let config_json = Config2Json(response.data);
-		return config_json.LensProfileIdentifier;
-	},response => {
-		console.warn(response)
-	})
-}
-export const  fetchAllConfig = function(){
-	let url = baseUrl + "/order?action=query&uuid=" + standardOrderUUID + "&genobj&config";
-	Vue.http.get(url).then(response => {
-		let json = response.data;
-		// if (json.result == 'false') throw new Error(json.reasons);
-		let glass_type_genobj_map = {}
-		for (let idx in json.config) {
-			let glass_type = fetchGlassTypeByConfig();
-			glass_type_genobj_map[glass_type] = json.genobj[idx];
-		}
-		return glass_type_genobj_map;
-	},response =>{
-		console.warn(response);
-	})
-}
+
+export const fetchGlassTypeByConfig = (config_uuid) => ajax({
+	url:baseUrl+"/data",
+	data:{
+		action:"download",
+		type:"config",
+		uuid:config_uuid
+	}
+})
+export const fetchAllConfig = () => ajax({
+	url:baseUrl+"/order",
+	data:{
+		action:'query',
+		uuid:standardOrderUUID,
+		genobj:'',
+		config:''
+	}
+})
 

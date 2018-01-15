@@ -33,12 +33,12 @@
                                 <!-- 全部/待扫描 -->
                                 <div class="order" v-for="(order,index) in toscan_array">
                                     <div class="order-header">
-                                        <span class="orderno">订单编号: {{order.orderuuid}}</span>
+                                        <span class="orderno">订单号: {{order.orderuuid}}</span>
                                         <span class="status">{{ order.status }}</span>
                                     </div>
                                     <div class="order-body">
                                         <div class="glass_pic">
-                                            <img src="" alt="">
+                                            <img src="../../img/frame/calliope_md18-01.png" alt="">
                                         </div>
                                         <div class="info">
                                             <div class="alia">
@@ -73,12 +73,12 @@
                                 <!--  全部/待支付-->
                                 <div class="order" v-for="(deal,index) in topay_array">
                                     <div class="order-header">
-                                        <span class="orderno">订单编号: {{order.orderuuid}}</span>
+                                        <span class="orderno">订单号: {{order.orderuuid}}</span>
                                         <span class="status">{{ order.status }}</span>
                                     </div>
                                     <div class="order-body">
                                         <div class="glass_pic">
-                                            <img src="" alt="">
+                                            <img src="../../img/frame/calliope_md18-01.png" alt="">
                                         </div>
                                         <div class="info">
                                             <div class="alia">
@@ -429,9 +429,10 @@ export default {
         //         this.$store.dLeftatch('getUserInfo');
         //     }
         // }
-        let user_url = baseUrl+'/user?action=query&uuid=4e9d3d679c50d7c5066768b8178b6814&orders';
+        let user_url = baseUrl+'/user?action=query&uuid=d0d733088ee50543f646b5b449b4eb61&orders';
         this.$http.get(user_url).then(response => {
             let orders = response.data.orders;
+            // console.log(response.data);
             orders.forEach(async (orderuuid) => {
             let res = await queryOrder(orderuuid);
             let deals = res.deals;         
@@ -621,7 +622,7 @@ export default {
 
 .tabs-head ul li span:hover,
 .tabs-head ul li span.active {
-    border-bottom: 3px solid rgb(73, 144, 238);
+    border-bottom: 4px solid rgb(73, 144, 238);
 }
 
 .tabs-body > div.active {

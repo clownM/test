@@ -103,7 +103,7 @@
 </template>
 <script>
 import {listFrameProfiles,queryFrameProfiles} from '../../service/getData'
-import {Config2Json} from '../../config/fswear'
+import {glassTypeGenobjMap,getFramesObj} from '../../config/fswear'
 import {baseUrl,standardOrderUUID} from '../../config/env'
     export default{
         mame:'mall',
@@ -117,34 +117,21 @@ import {baseUrl,standardOrderUUID} from '../../config/env'
         },
         methods:{
             async initData(){
-                let glass_type_genobj_map = {};
-                let url = baseUrl + "/order?action=query&uuid=" + standardOrderUUID + "&genobj&config";
-                this.$http.get(url).then(response => {
-                    let json = response.data;
-                    for (let idx in json.config) {
-                        let url2 = baseUrl+"/data?action=download&uuid="+json.config[idx]+"&type=config";
-                        this.$http.get(url2).then(response => {
-                            let config_json = Config2Json(response.data);
-                            let glass_type = config_json.LensProfileIdentifier;
-                            glass_type_genobj_map[glass_type] = json.genobj[idx];
-                        },response => {
-                            console.warn(response)
-                        })
-                    }
-                    console.log(glass_type_genobj_map);
-                },response =>{
-                    console.warn(response);
-                })
+                let res = await glassTypeGenobjMap();
+                console.log(res);
 
                let res2 = await listFrameProfiles();
                let frame_profiles_uuid = res2.list[0];
                let res3 = await queryFrameProfiles(frame_profiles_uuid);
+               console.log("frame_profiles:",res3);
                this.alias = res3.description.frame_profiles.alias;
                for(let key in res3.description.frame_profiles.data){
                    let val = res3.description.frame_profiles.data[key];
-                   let id = glass_type_genobj_map[val];
-                   
+                   let id = res[val];
                }
+               let frames_obj = await getFramesObj();
+               console.log(frames_obj);
+               
             },
         }
     }
