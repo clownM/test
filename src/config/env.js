@@ -11,13 +11,12 @@
 let baseUrl = '';
 let routerMode = 'history';
 let imgBaseUrl = 'http://images.cangdu.org/';
-let standardOrderUUID = "af217f115db650685776e1267552b169";
+let standardOrderUUID = "d64c27b20a73b1bc480322c95dab7e20";
 
 
 if (process.env.NODE_ENV == 'development') {
 
 }else if(process.env.NODE_ENV == 'production'){
-
 	// baseUrl = 'http://cangdu.org:8001';
 }
 

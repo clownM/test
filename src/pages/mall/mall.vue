@@ -131,7 +131,6 @@ import {baseUrl,standardOrderUUID} from '../../config/env'
                }
                let frames_obj = await getFramesObj();
                console.log(frames_obj);
-               
             },
         }
     }
@@ -154,19 +153,19 @@ import {baseUrl,standardOrderUUID} from '../../config/env'
         background-color: #fff;
     }
     .search {
-        height: 1.173333rem;
+        height: 88px;
         position: relative;
         display: flex;
-        padding-left: .613333rem;
-        padding-right: .613333rem;
+        padding-left: 46px;
+        padding-right: 46px;
     }
 
     .search-box {
         flex:1;
-        height: .88rem;
-        margin-top: .146667rem;
-        border-radius: .066667rem;
-        padding-left: .853333rem;
+        height: 66px;
+        margin-top: 11px;
+        border-radius: 5px;
+        padding-left: 64px;
         background-color: rgb(238, 238, 238);
         outline: none;
         border: none;
@@ -178,15 +177,15 @@ import {baseUrl,standardOrderUUID} from '../../config/env'
 
     .search-icon {
         position: absolute;
-        width: .4rem;
-        height: .426667rem;
-        top: .373333rem;
-        left: .84rem;
+        width: 30px;
+        height: 32px;
+        top: 28px;
+        left: 63px;
         background-color: #fff;
     }
 
     .banner {
-        height: 4.933333rem;
+        height: 370px;
         img{
             width: 100%;
             height:100%;
@@ -194,26 +193,26 @@ import {baseUrl,standardOrderUUID} from '../../config/env'
     }
 
     .frameandsunglasses {
-        height: 1.8rem;
+        height: 135px;
         display: flex;
         justify-content: space-between;
-        padding-top: 0.666667rem;
-        padding-left: .613333rem;
-        padding-right: .613333rem;
+        padding-top: 50px;
+        padding-left: 46px;
+        padding-right: 46px;
         .frame,
         .sunglasses {
-            width: 3.893333rem;
-            height: 1.066667rem;
-            // border: 1px solid rgb(238, 238, 238);
+            width: 292px;
+            height: 80px;
+            // border: 0.0133rem solid rgb(238, 238, 238);
             border-radius: 5px;
             display: flex;
             justify-content: space-around;
             align-items: center;
-            box-shadow: 5px 5px 15px 2px rgb(238, 238, 238);
+            box-shadow: 50px 5px 15px 2px rgb(238, 238, 238);
             -moz-box-shadow:10px 10px 15px 5px #888;
             img{
-                width: 1.493333rem;
-                height: .533333rem;
+                width: 112px;
+                height: 40px;
             }
             span{
                 font-size: 24px;
@@ -223,14 +222,14 @@ import {baseUrl,standardOrderUUID} from '../../config/env'
     }
 
     .hotItems,.recommendItems{
-        margin-top: 0.266667rem;
+        margin-top: 20px;
         .title{
-            height: 1.04rem;
+            height: 78px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-left: .613333rem;
-            padding-right: .613333rem;
+            padding-left: 46px;
+            padding-right: 46px;
             border-bottom: 1px solid rgb(238, 238, 238);
             .left{
                 display: flex;
@@ -243,30 +242,30 @@ import {baseUrl,standardOrderUUID} from '../../config/env'
             .shuxian{
                 display: inline-block;
                 width: 4px;
-                height: .40rem;
+                height: 30px;
                 background-color: rgb(73, 144, 238);
             }
         }
     }
     .hotItems {
         .hotItems-carousel{
-            height: 5.12rem;
+            height: 384px;
             .van-swipe{
                 height: 100%;
                 .items{
-                    padding-left: .613333rem;
-                    padding-right: .613333rem;
+                    padding-left: 46px;
+                    padding-right: 46px;
                     display: flex;
                     justify-content: space-between;
                     .item{
-                        width: 2.666667rem;
+                        width: 200px;
                         .imgwrap{
-                            width: 2.666667rem;
-                            height: 2.666667rem;
+                            width: 200px;
+                            height: 200px;
                             display: flex;
                             align-items: center;
                             img{
-                                width: 2.666667rem;
+                                width: 200px;
                             }   
                         }
                         p{
@@ -277,8 +276,8 @@ import {baseUrl,standardOrderUUID} from '../../config/env'
                 }
                 .van-swipe__indicators{
                     i{
-                        width: 0.186667rem;
-                        height: 0.186667rem;
+                        width: 14px;
+                        height: 14px;
                         background-color: rgb(238, 238, 238);
                     }
                     i.van-swipe__indicator--active{
@@ -293,19 +292,19 @@ import {baseUrl,standardOrderUUID} from '../../config/env'
             justify-content: flex-start;
         }
         .items-wrap{
-            padding-left: .613333rem;
-            padding-right: .613333rem;
-            padding-top: 0.333333rem;
+            padding-left: 46px;
+            padding-right: 46px;
+            padding-top: 25px;
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
             .recommend-item{
-                width: 4.186667rem;
-                padding-bottom: 0.453333rem;
+                width: 314px;
+                padding-bottom: 34px;
                 background-color: #fff;
                 .img-wrap{
-                    width: 4.186667rem;
-                    height: 4.186667rem;
+                    width: 314px;
+                    height: 314px;
                     border-radius: 5px;
                     background-color: rgb(236, 236, 236);
                     display: flex;

@@ -30,59 +30,19 @@
                                 还没有相关的订单呢~
                             </div>
                             <div v-else>
-                                <!-- 全部/待扫描 -->
-                                <div class="order" v-for="(order,index) in toscan_array">
-                                    <div class="order-header">
-                                        <span class="orderno">订单号: {{order.orderuuid}}</span>
-                                        <span class="status">{{ order.status }}</span>
-                                    </div>
-                                    <div class="order-body">
-                                        <div class="glass_pic">
-                                            <img src="../../img/frame/calliope_md18-01.png" alt="">
-                                        </div>
-                                        <div class="info">
-                                            <div class="alia">
-                                                <p class="alia">F157633</p>
-                                                <p class="name">圆形复古镜框眼镜</p>
-                                            </div>
-                                            <div class="kezi">
-                                                <p>镜腿刻字</p>
-                                                <p>镜框整体定制</p>
-                                            </div>
-                                        </div>
-                                        <div class="price">
-                                            <span>￥890.00</span>
-                                        </div>
-                                        <!-- <div class="createdate">订单创建时间:
-                                            <span v-text="order.createdate"></span>
-                                        </div>
-                                        <div class="station">预约扫描地址：
-                                            <span v-text="order.station"></span>
-                                        </div>
-                                        <div class="appointmentdate">预约扫描时间：
-                                            <span v-text="order.appointmentdate"></span>
-                                        </div> -->
-                                    </div>
-                                    <div class="order-footer-price">
-                                        <span>共一件商品 合计：￥890.00（含运费：￥0.00）</span>
-                                    </div>
-                                    <div class="order-footer">
-                                        <button class="cancelOrder" @click='cancel(order.orderuuid)'>取消订单</button>
-                                    </div>
-                                </div>
                                 <!--  全部/待支付-->
                                 <div class="order" v-for="(deal,index) in topay_array">
                                     <div class="order-header">
-                                        <span class="orderno">订单号: {{order.orderuuid}}</span>
-                                        <span class="status">{{ order.status }}</span>
+                                        <span class="orderno">订单号: {{deal.dealuuid}}</span>
+                                        <span class="status">{{ deal.status }}</span>
                                     </div>
                                     <div class="order-body">
-                                        <div class="glass_pic">
+                                        <div class="glass-pic">
                                             <img src="../../img/frame/calliope_md18-01.png" alt="">
                                         </div>
                                         <div class="info">
-                                            <div class="alia">
-                                                <p class="alia">F157633</p>
+                                            <div class="alias">
+                                                <p class="alias">F157633</p>
                                                 <p class="name">圆形复古镜框眼镜</p>
                                             </div>
                                             <div class="kezi">
@@ -93,282 +53,255 @@
                                         <div class="price">
                                             <span>￥{{deal.price}}</span>
                                         </div>
-                                        <!-- <div class="createdate">订单创建时间:
-                                            <span v-text="order.createdate"></span>
-                                        </div>
-                                        <div class="station">预约扫描地址：
-                                            <span v-text="order.station"></span>
-                                        </div>
-                                        <div class="appointmentdate">预约扫描时间：
-                                            <span v-text="order.appointmentdate"></span>
-                                        </div> -->
+                                    </div>
+                                    <div class="order-footer-price">
+                                        <p>共一件商品 合计：￥{{deal.price}} （含运费：￥0.00）</p>
                                     </div>
                                     <div class="order-footer">
-                                        <button class="cancelOrder" @click='cancel(order.orderuuid)'>取消订单</button>
+                                        <button class="cancelOrder" @click='cancel()'>取消订单</button>
                                         <button>立即付款</button>
                                     </div>
                                 </div>
-                                <!-- 全部/生产中 -->
+                                <!-- 全部/制作中 -->
                                 <div class="order" v-for="(deal,index) in printing_array">
                                     <div class="order-header">
-                                        <div></div>
-                                        <div class="status" v-text="deal.status"></div>
+                                        <span class="orderno">订单号: {{deal.dealuuid}}</span>
+                                        <span class="status">{{ deal.status }}</span>
                                     </div>
                                     <div class="order-body">
-                                        <div class="orderuuid">orderuuid
-                                            <span v-text="deal.orderuuid"></span>
+                                        <div class="glass-pic">
+                                            <img src="../../img/frame/calliope_md18-01.png" alt="">
                                         </div>
-                                        <div class="dealuuid">dealuuid:
-                                            <span v-text="deal.dealuuid"></span>
+                                        <div class="info">
+                                            <div class="alias">
+                                                <p class="alias">F157633</p>
+                                                <p class="name">圆形复古镜框眼镜</p>
+                                            </div>
+                                            <div class="kezi">
+                                                <p>镜腿刻字</p>
+                                                <p>镜框整体定制</p>
+                                            </div>
                                         </div>
-                                        <div class="createdate">order创建时间:
-                                            <span v-text="deal.orderCreatedate"></span>
+                                        <div class="price">
+                                            <span>￥{{deal.price}}</span>
                                         </div>
-                                        <div class="station">预约扫描地址：
-                                            <span v-text="deal.station"></span>
-                                        </div>
-                                        <div class="appointmentdate">预约扫描时间：
-                                            <span v-text="deal.appointmentdate"></span>
-                                        </div>
-                                        <div class="scandate">实际扫描时间：
-                                            <span v-text="deal.scandate"></span>
-                                        </div>
-                                        <div class="dealCreatedate">deal创建时间：
-                                            <span v-text="deal.dealCreatedate"></span>
-                                        </div>
-                                        <div class="price" v-text="'合计： ￥ '+deal.price"></div>
+                                    </div>
+                                    <div class="order-footer-price">
+                                        <p>共一件商品 合计：￥{{deal.price}} （含运费：￥0.00）</p>
                                     </div>
                                     <div class="order-footer">
-                                        <button class="">催单</button>
-                                        <button class="to_order_details" @click="toOrderDetails(deal.orderuuid,deal.dealuuid)">订单详情</button>
+                                        <button>催单</button>
                                     </div>
                                 </div>
-                                <!-- 全部/待收货 -->
+                                <!-- 全部/配送中 -->
                                 <div class="order" v-for="(deal,index) in delivering_array">
                                     <div class="order-header">
-                                        <div></div>
-                                        <div class="status" v-text="deal.status"></div>
+                                        <span class="orderno">订单号: {{deal.dealuuid}}</span>
+                                        <span class="status">{{ deal.status }}</span>
                                     </div>
                                     <div class="order-body">
-                                        <div class="orderuuid">orderuuid
-                                            <span v-text="deal.orderuuid"></span>
+                                        <div class="glass-pic">
+                                            <img src="../../img/frame/calliope_md18-01.png" alt="">
                                         </div>
-                                        <div class="dealuuid">dealuuid:
-                                            <span v-text="deal.dealuuid"></span>
+                                        <div class="info">
+                                            <div class="alias">
+                                                <p class="alias">F157633</p>
+                                                <p class="name">圆形复古镜框眼镜</p>
+                                            </div>
+                                            <div class="kezi">
+                                                <p>镜腿刻字</p>
+                                                <p>镜框整体定制</p>
+                                            </div>
                                         </div>
-                                        <div class="createdate">order创建时间:
-                                            <span v-text="deal.orderCreatedate"></span>
+                                        <div class="price">
+                                            <span>￥{{deal.price}}</span>
                                         </div>
-                                        <div class="station">预约扫描地址：
-                                            <span v-text="deal.station"></span>
-                                        </div>
-                                        <div class="appointmentdate">预约扫描时间：
-                                            <span v-text="deal.appointmentdate"></span>
-                                        </div>
-                                        <div class="scandate">实际扫描时间：
-                                            <span v-text="deal.scandate"></span>
-                                        </div>
-                                        <div class="dealCreatedate">deal创建时间：
-                                            <span v-text="deal.dealCreatedate"></span>
-                                        </div>
-                                        <div class="price" v-text="'合计： ￥ '+deal.price"></div>
+                                    </div>
+                                    <div class="order-footer-price">
+                                        <p>共一件商品 合计：￥{{deal.price}} （含运费：￥0.00）</p>
                                     </div>
                                     <div class="order-footer">
-                                        <button class="to_delivery" @click='toDelivery(deal.delivery_company,deal.delivery_postid)'>查看物流</button>
-                                        <button class="">确认收货</button>
-                                        <button class="to_order_details" @click="toOrderDetails(deal.orderuuid,deal.dealuuid)">订单详情</button>
+                                        <button>查看物流</button>
+                                        <button>确认收货</button>
                                     </div>
                                 </div>
-                                <!-- 全部/已收货 -->
+                                <!-- 全部/已完成 -->
                                 <div class="order" v-for="(deal,index) in done_array">
                                     <div class="order-header">
-                                        <div></div>
-                                        <div class="status" v-text="deal.status"></div>
+                                        <span class="orderno">订单号: {{deal.dealuuid}}</span>
+                                        <span class="status">{{ deal.status }}</span>
                                     </div>
                                     <div class="order-body">
-                                        <div class="orderuuid">orderuuid
-                                            <span v-text="deal.orderuuid"></span>
+                                        <div class="glass-pic">
+                                            <img src="../../img/frame/calliope_md18-01.png" alt="">
                                         </div>
-                                        <div class="dealuuid">dealuuid:
-                                            <span v-text="deal.dealuuid"></span>
+                                        <div class="info">
+                                            <div class="alias">
+                                                <p class="alias">F157633</p>
+                                                <p class="name">圆形复古镜框眼镜</p>
+                                            </div>
+                                            <div class="kezi">
+                                                <p>镜腿刻字</p>
+                                                <p>镜框整体定制</p>
+                                            </div>
                                         </div>
-                                        <div class="createdate">order创建时间:
-                                            <span v-text="deal.orderCreatedate"></span>
-                                        </div>
-                                        <div class="station">预约扫描地址：
-                                            <span v-text="deal.station"></span>
-                                        </div>
-                                        <div class="appointmentdate">预约扫描时间：
-                                            <span v-text="deal.appointmentdate"></span>
-                                        </div>
-                                        <div class="scandate">实际扫描时间：
-                                            <span v-text="deal.scandate"></span>
-                                        </div>
-                                        <div class="dealCreatedate">deal创建时间：
-                                            <span v-text="deal.dealCreatedate"></span>
-                                        </div>
-                                        <div class="price" v-text="'合计： ￥ '+deal.price"></div>
-                                    </div>
-                                    <div class="order-footer">
-                                        <button class="to_order_details" @click="toOrderDetails(deal.orderuuid,deal.dealuuid)">订单详情</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- 待扫描 -->
-                        <div class="tabs-contents div-toscan" v-bind:class='{active:i == 1}'>
-                            <div class="failorder" v-if="isEmpty(topay_array)">
-                                还没有相关的订单呢~
-                            </div>
-                            <div v-else>
-                                <div class="order" v-for="(order,index) in toscan_array">
-                                    <div class="order-header">
-                                        <div></div>
-                                        <div class="status" v-text="order.status"></div>
-                                    </div>
-                                    <div class="order-body">
-                                        <div class="orderuuid">orderuuid：
-                                            <span v-text="order.orderuuid"></span>
-                                        </div>
-                                        <div class="createdate">订单创建时间:
-                                            <span v-text="order.createdate"></span>
-                                        </div>
-                                        <div class="station">预约扫描地址：
-                                            <span v-text="order.station"></span>
-                                        </div>
-                                        <div class="appointmentdate">预约扫描时间：
-                                            <span v-text="order.appointmentdate"></span>
+                                        <div class="price">
+                                            <span>￥{{deal.price}}</span>
                                         </div>
                                     </div>
-                                    <div class="order-footer">
-                                        <button class="cancelOrder" @click='cancel(order.orderuuid)'>取消预约</button>
+                                    <div class="order-footer-price">
+                                        <p>共一件商品 合计：￥{{deal.price}} （含运费：￥0.00）</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- 待支付 -->
-                        <div class="tabs-contents div-topay" v-bind:class='{active:i == 2}'>
+                        <div class="tabs-contents div-topay" v-bind:class='{active:i == 1}'>
                             <div class="failorder" v-if="isEmpty(topay_array)">
                                 还没有相关的订单呢~
                             </div>
                             <div v-else>
                                 <div class="order" v-for="(deal,index) in topay_array">
                                     <div class="order-header">
-                                        <div></div>
-                                        <div class="status" v-text="deal.status"></div>
+                                        <span class="orderno">订单号: {{deal.dealuuid}}</span>
+                                        <span class="status">{{ deal.status }}</span>
                                     </div>
                                     <div class="order-body">
-                                        <div class="orderuuid">
-                                            orderuuid: <span>{{deal.orderuuid}}</span>
+                                        <div class="glass-pic">
+                                            <img src="../../img/frame/calliope_md18-01.png" alt="">
                                         </div>
-                                        <div class="dealuuid">dealuuid:
-                                            <span v-text="deal.dealuuid"></span>
+                                        <div class="info">
+                                            <div class="alias">
+                                                <p class="alias">F157633</p>
+                                                <p class="name">圆形复古镜框眼镜</p>
+                                            </div>
+                                            <div class="kezi">
+                                                <p>镜腿刻字</p>
+                                                <p>镜框整体定制</p>
+                                            </div>
                                         </div>
-                                        <div class="createdate">order创建时间:
-                                            <span v-text="deal.orderCreatedate"></span>
+                                        <div class="price">
+                                            <span>￥{{deal.price}}</span>
                                         </div>
-                                        <div class="station">预约扫描地址：
-                                            <span v-text="deal.station"></span>
-                                        </div>
-                                        <div class="appointmentdate">预约扫描时间：
-                                            <span v-text="deal.appointmentdate"></span>
-                                        </div>
-                                        <div class="scandate">实际扫描时间：
-                                            <span v-text="deal.scandate"></span>
-                                        </div>
-                                        <div class="dealCreatedate">deal创建时间：
-                                            <span v-text="deal.dealCreatedate"></span>
-                                        </div>
-                                        <div class="price" v-text="'合计： ￥ '+deal.price"></div>
+                                    </div>
+                                    <div class="order-footer-price">
+                                        <p>共一件商品 合计：￥{{deal.price}} （含运费：￥0.00）</p>
                                     </div>
                                     <div class="order-footer">
-                                        <button class="">付款</button>
-                                        <button class="to_order_details" @click="toOrderDetails(deal.orderuuid,deal.dealuuid)">订单详情</button>
+                                        <button class="cancelOrder" @click='cancel()'>取消订单</button>
+                                        <button>立即付款</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- 生产中 -->
-                        <div class="tabs-contents div-printing" v-bind:class='{active:i == 3}'>
+                        <!-- 制作中 -->
+                        <div class="tabs-contents div-printing" v-bind:class='{active:i == 2}'>
                             <div class="failorder" v-if="isEmpty(printing_array)">
                                 还没有相关的订单呢~
                             </div>
                             <div v-else>
                                 <div class="order" v-for="(deal,index) in printing_array">
                                     <div class="order-header">
-                                        <div></div>
-                                        <div class="status" v-text="deal.status"></div>
+                                        <span class="orderno">订单号: {{deal.dealuuid}}</span>
+                                        <span class="status">{{ deal.status }}</span>
                                     </div>
                                     <div class="order-body">
-                                        <div class="orderuuid">orderuuid
-                                            <span v-text="deal.orderuuid"></span>
+                                        <div class="glass-pic">
+                                            <img src="../../img/frame/calliope_md18-01.png" alt="">
                                         </div>
-                                        <div class="dealuuid">dealuuid:
-                                            <span v-text="deal.dealuuid"></span>
+                                        <div class="info">
+                                            <div class="alias">
+                                                <p class="alias">F157633</p>
+                                                <p class="name">圆形复古镜框眼镜</p>
+                                            </div>
+                                            <div class="kezi">
+                                                <p>镜腿刻字</p>
+                                                <p>镜框整体定制</p>
+                                            </div>
                                         </div>
-                                        <div class="createdate">order创建时间:
-                                            <span v-text="deal.orderCreatedate"></span>
+                                        <div class="price">
+                                            <span>￥{{deal.price}}</span>
                                         </div>
-                                        <div class="station">预约扫描地址：
-                                            <span v-text="deal.station"></span>
-                                        </div>
-                                        <div class="appointmentdate">预约扫描时间：
-                                            <span v-text="deal.appointmentdate"></span>
-                                        </div>
-                                        <div class="scandate">实际扫描时间：
-                                            <span v-text="deal.scandate"></span>
-                                        </div>
-                                        <div class="dealCreatedate">deal创建时间：
-                                            <span v-text="deal.dealCreatedate"></span>
-                                        </div>
-                                        <div class="price" v-text="'合计： ￥ '+deal.price"></div>
+                                    </div>
+                                    <div class="order-footer-price">
+                                        <p>共一件商品 合计：￥{{deal.price}} （含运费：￥0.00）</p>
                                     </div>
                                     <div class="order-footer">
-                                        <button class="">催单</button>
-                                        <button class="to_order_details" @click="toOrderDetails(deal.orderuuid,deal.dealuuid)">订单详情</button>
+                                        <button>催单</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!-- 待收货 -->
-                        <div class="tabs-contents div-delivering" v-bind:class='{active:i == 4}'>
+                        <!-- 配送中 -->
+                        <div class="tabs-contents div-delivering" v-bind:class='{active:i == 3}'>
                             <div class="failorder" v-if="isEmpty(delivering_array)">
                                 还没有相关的订单呢~
                             </div>
                             <div v-else>
                                 <div class="order" v-for="(deal,index) in delivering_array">
                                     <div class="order-header">
-                                        <div></div>
-                                        <div class="status" v-text="deal.status"></div>
+                                        <span class="orderno">订单号: {{deal.dealuuid}}</span>
+                                        <span class="status">{{ deal.status }}</span>
                                     </div>
                                     <div class="order-body">
-                                        <div class="orderuuid">orderuuid
-                                            <span v-text="deal.orderuuid"></span>
+                                        <div class="glass-pic">
+                                            <img src="../../img/frame/calliope_md18-01.png" alt="">
                                         </div>
-                                        <div class="dealuuid">dealuuid:
-                                            <span v-text="deal.dealuuid"></span>
+                                        <div class="info">
+                                            <div class="alias">
+                                                <p class="alias">F157633</p>
+                                                <p class="name">圆形复古镜框眼镜</p>
+                                            </div>
+                                            <div class="kezi">
+                                                <p>镜腿刻字</p>
+                                                <p>镜框整体定制</p>
+                                            </div>
                                         </div>
-                                        <div class="createdate">order创建时间:
-                                            <span v-text="deal.orderCreatedate"></span>
+                                        <div class="price">
+                                            <span>￥{{deal.price}}</span>
                                         </div>
-                                        <div class="station">预约扫描地址：
-                                            <span v-text="deal.station"></span>
-                                        </div>
-                                        <div class="appointmentdate">预约扫描时间：
-                                            <span v-text="deal.appointmentdate"></span>
-                                        </div>
-                                        <div class="scandate">实际扫描时间：
-                                            <span v-text="deal.scandate"></span>
-                                        </div>
-                                        <div class="dealCreatedate">deal创建时间：
-                                            <span v-text="deal.dealCreatedate"></span>
-                                        </div>
-                                        <div class="price" v-text="'合计： ￥ '+deal.price"></div>
+                                    </div>
+                                    <div class="order-footer-price">
+                                        <p>共一件商品 合计：￥{{deal.price}} （含运费：￥0.00）</p>
                                     </div>
                                     <div class="order-footer">
-                                        <button class="to_delivery" @click='toDelivery(deal.delivery_company,deal.delivery_postid)'>查看物流</button>
-                                        <button class="">确认收货</button>
-                                        <button class="to_order_details" @click="toOrderDetails(deal.orderuuid,deal.dealuuid)">订单详情</button>
+                                        <button @click="toDelivery(deal.delivery_company,deal.delivery_postid)">查看物流</button>
+                                        <button>确认收货</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 已完成 -->
+                        <div class="tabs-contents div-done" v-bind:class='{active:i == 4}'>
+                            <div class="failorder" v-if="isEmpty(done_array)">
+                                还没有相关的订单呢~
+                            </div>
+                            <div v-else>
+                                <div class="order" v-for="(deal,index) in done_array">
+                                    <div class="order-header">
+                                        <span class="orderno">订单号: {{deal.dealuuid}}</span>
+                                        <span class="status">{{ deal.status }}</span>
+                                    </div>
+                                    <div class="order-body">
+                                        <div class="glass-pic">
+                                            <img src="../../img/frame/calliope_md18-01.png" alt="">
+                                        </div>
+                                        <div class="info">
+                                            <div class="alias">
+                                                <p class="alias">F157633</p>
+                                                <p class="name">圆形复古镜框眼镜</p>
+                                            </div>
+                                            <div class="kezi">
+                                                <p>镜腿刻字</p>
+                                                <p>镜框整体定制</p>
+                                            </div>
+                                        </div>
+                                        <div class="price">
+                                            <span>￥{{deal.price}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="order-footer-price">
+                                        <p>共一件商品 合计：￥{{deal.price}} （含运费：￥0.00）</p>
                                     </div>
                                 </div>
                             </div>
@@ -381,9 +314,6 @@
 </template>
 <script>
 import goback from "@/components/goback";
-// import navbar from "@/components/navbar";
-// import navLeft from '@/components/nav_left'
-// import {mapState,mapMutations} from 'vuex';
 import {baseUrl} from '../../config/env'
 import { queryOrder,cancelOrder,queryDeal } from "@/service/getData"
 import {formatDate,getStatus} from '../../config/fswear'
@@ -413,125 +343,86 @@ export default {
     goback
   },
   computed: {
-    //   ...mapState([
-    //       'userInfo'
-    //   ]),
+
   },
   methods: {
-    // ...mapMutations([
-    //     'ORDEROBJ',
-    //     'DEALOBJ',
-    //     'SAVE_DELIVERY'
-    // ]),
+    
     async initData() {
-        // if(getCookie('UserUUID')){
-        //     if (!this.userInfo) {
-        //         this.$store.dLeftatch('getUserInfo');
-        //     }
-        // }
-        let user_url = baseUrl+'/user?action=query&uuid=d0d733088ee50543f646b5b449b4eb61&orders';
+        var useruuid;
+        await this.$http.get(baseUrl+'/user?action=login&phone=18812345678&username=20161210&password=qwerty123').then(response => {
+            useruuid = response.data.uuid;
+        },response => {
+            console.log(response.data);
+            
+        })
+        console.log(useruuid);
+        
+        let user_url = baseUrl+'/user?action=query&uuid='+useruuid+'&orders';
         this.$http.get(user_url).then(response => {
+            console.log(response.data);                              //queryUser 
             let orders = response.data.orders;
-            // console.log(response.data);
-            orders.forEach(async (orderuuid) => {
-            let res = await queryOrder(orderuuid);
-            let deals = res.deals;         
-            if(res){
-                // 待扫描
-                if(res.status == 'toscan'){
-                    this.toscan_array.push({
-                        'orderuuid':orderuuid,
-                        'createdate':formatDate(res.createdate,'long_'),
-                        'station':res.station,
-                        'appointmentdate':formatDate(res.appointmentdate,'long_'),
-                        'scandate':formatDate(res.scandate,'long_'),
-                        'status':'等待扫描'
-                    })
-                }else{
-                    if(deals.length !== 0){
-                        deals.forEach(async (dealuuid) => {
-                            let dealobj = await queryDeal(dealuuid);
-                            /* 待支付 */
-                            if(dealobj.paymentstatus == 'topay'){
-                                this.topay_array.push({
-                                    'orderuuid':orderuuid,
-                                    'dealuuid':dealuuid,
-                                    'station': res.station,
-                                    'status':'待支付',
-                                    'price':dealobj.price,
-                                    'appointmentdate':formatDate(res.appointmentdate,'long_'),
-                                    'scandate':formatDate(res.scandate,'long_'),
-                                    'orderCreatedate':formatDate(res.createdate,'long_'),
-                                    'dealCreatedate':formatDate(dealobj.createdate,'long_'),
-                                    'discount':dealobj.discount
-                                })
-                            /* 生产中 */
-                            }else if(dealobj.paymentstatus == 'paid' && dealobj.status == 'printing'){
-                                this.printing_array.push({
-                                    'orderuuid':orderuuid,
-                                    'dealuuid':dealuuid,
-                                    'station': res.station,
-                                    'status': '生产中',
-                                    'price':dealobj.price,
-                                    'appointmentdate':formatDate(res.appointmentdate,'long_'),
-                                    'scandate':formatDate(res.scandate,'long_'),
-                                    'orderCreatedate':formatDate(res.createdate,'long_'),
-                                    'dealCreatedate':formatDate(dealobj.createdate,'long_'),
-                                    'discount':dealobj.discount
-                                })
-                            /* 运输中 */
-                            }else if(dealobj.paymentstatus == 'paid' && dealobj.status == 'delivering'){
-                                let delivery = dealobj.delivery;
-                                let delivery_company = '';
-                                let delivery_postid = '';
-                                delivery = JSON.parse(delivery);
-                                if (delivery.postprocessing_delivery == undefined) {
-                                    delivery_company = delivery.production_delivery.courier_company;
-                                    delivery_postid = delivery.production_delivery.courier_number;
-                                } else {
-                                    delivery_company = delivery.postprocessing_delivery.courier_company;
-                                    delivery_postid = delivery.postprocessing_delivery.courier_number;
-                                }
-                                this.delivering_array.push({
-                                    'orderuuid':orderuuid,
-                                    'dealuuid':dealuuid,
-                                    'station': res.station,
-                                    'status': '运输中',
-                                    'price':dealobj.price,
-                                    'appointmentdate':formatDate(res.appointmentdate,'long_'),
-                                    'scandate':formatDate(res.scandate,'long_'),
-                                    'orderCreatedate':formatDate(res.createdate,'long_'),
-                                    'dealCreatedate':formatDate(dealobj.createdate,'long_'),
-                                    'discount':dealobj.discount,
-                                    'delivery_company':delivery_company,
-                                    'delivery_postid': delivery_postid
-                                })
-                            /* 已完成 */
-                            }else if(dealobj.paymentstatus == 'paid' && dealobj.status =='done'){
-                                this.done_array.push({
-                                    'orderuuid':orderuuid,
-                                    'dealuuid':dealuuid,
-                                    'station': res.station,
-                                    'status': '交易完成',
-                                    'price':dealobj.price,
-                                    'appointmentdate':formatDate(res.appointmentdate,'long_'),
-                                    'scandate':formatDate(res.scandate,'long_'),
-                                    'orderCreatedate':formatDate(res.createdate,'long_'),
-                                    'dealCreatedate':formatDate(dealobj.createdate,'long_'),
-                                    'discount':dealobj.discount
-                                })
+            orders.forEach(async orderuuid => {
+                let res = await queryOrder(orderuuid);
+                let deals = res.deals;     
+                if(deals.length !== 0){
+                    deals.forEach(async (dealuuid) => {
+                        let dealobj = await queryDeal(dealuuid);
+                        /* 待支付 */
+                        if(dealobj.paymentstatus == 'topay'){
+                            this.topay_array.push({
+                                'dealuuid':dealuuid,
+                                'status':'待支付',
+                                'price':dealobj.price,
+                                'discount':dealobj.discount,
+                                "LensProfileIdentifier":dealobj.config_literal.LensProfileIdentifier
+                            })
+                        /* 制作中 */
+                        }else if(dealobj.paymentstatus == 'paid' && dealobj.status == 'printing'){
+                            this.printing_array.push({
+                                'dealuuid':dealuuid,
+                                'status':'制作中',
+                                'price':dealobj.price,
+                                'discount':dealobj.discount,
+                                "LensProfileIdentifier":dealobj.config_literal.LensProfileIdentifier
+                            })
+                        /* 配送中 */
+                        }else if(dealobj.paymentstatus == 'paid' && dealobj.status == 'delivering'){
+                            let delivery = dealobj.delivery;
+                            let delivery_company = '';
+                            let delivery_postid = '';
+                            delivery = JSON.parse(delivery);
+                            if (delivery.postprocessing_delivery == undefined) {
+                                delivery_company = delivery.production_delivery.courier_company;
+                                delivery_postid = delivery.production_delivery.courier_number;
+                            } else {
+                                delivery_company = delivery.postprocessing_delivery.courier_company;
+                                delivery_postid = delivery.postprocessing_delivery.courier_number;
                             }
-                        })
-                    }
+                            this.delivering_array.push({
+                                'dealuuid':dealuuid,
+                                'status':'配送中',
+                                'price':dealobj.price,
+                                'discount':dealobj.discount,
+                                "LensProfileIdentifier":dealobj.config_literal.LensProfileIdentifier,
+                                'delivery_company':delivery_company,
+                                'delivery_postid': delivery_postid
+                            })
+                        /* 已完成 */
+                        }else if(dealobj.paymentstatus == 'paid' && dealobj.status =='done'){
+                            this.done_array.push({
+                                'dealuuid':dealuuid,
+                                'status':'已完成',
+                                'price':dealobj.price,
+                                'discount':dealobj.discount,
+                                "LensProfileIdentifier":dealobj.config_literal.LensProfileIdentifier
+                            })
+                        }
+                    })
                 }
-            }
-        });
+            });
         },response => {
             console.log('查询用户信息失败',response)
         })
-        // console.log(this.userInfo);
-        // let orders = this.userInfo.orders;
-         
     },
     isEmpty(array) {
       if (array.length == 0) {
@@ -558,33 +449,27 @@ export default {
     async toOrderDetails(orderuuid,dealuuid){
         let orderobj = await queryOrder(orderuuid);
         let dealobj = await queryDeal(dealuuid);
-        // this.ORDEROBJ(orderobj);
-        // this.DEALOBJ(dealobj);
         setSessionStore('orderuuid',orderuuid);
         setSessionStore('dealuuid',dealuuid);
         this.$router.push('/orderlist/orderDetails');
     },
     //查看物流
     toDelivery(company,postid){
-        // this.SAVE_DELIVERY({company:company,postid:postid});
         setSessionStore('delivery_company',company);
-        setSessionStore('delivery_postid',postid)
-        this.$router.push('/delivery')
+        setSessionStore('delivery_postid',postid);
+        console.log(company,postid);
+        
+        window.location.href="./delivery.html";
     },
   },
-  watch: {
-    // userInfo: function (value){
-    //     this.initData()
-    // }
-  }
 };
 </script>
 
 <style lang='scss'>
 @import "../../style/common";
-// @import '../../style/fswear';
 .orderlist-page{
     width:100%;
+    word-break: break-all;
 }
 .tabs-body{
     .tabs-head {
@@ -615,8 +500,6 @@ export default {
     .tabs-contents{
         display: none;
         top: 170px;
-        // padding-top: 158px;
-        // background-color: rgb(100, 100, 100);
     }
 }
 
@@ -638,46 +521,52 @@ export default {
     width: 100%;
     height: 88px;
     line-height: 88px;
-    // display: flex;
-    // justify-content: space-between;
     padding-left: 46px;
     padding-right: 46px;
     border-bottom: 2px solid rgb(242, 242, 242);
+    display: flex;
+    justify-content: space-between;
 }
 
 .order .order-body {
-    padding-left: 46px;
-    padding-right: 46px;
+    padding: 30px 46px;
     display: flex;
     .glass-pic{
         width: 182px;
         height: 182px;
         margin-right: 28px;
+        display: flex;
+        align-items: center;
+        img{
+            width: 100%;
+        }
     }
     .info{
         flex:1;
         display: flex;
-        flex-direction: vertical;
+        flex-direction: column;
         justify-content: space-between;
-        .alia{
-            flex:1;
-        }
-        .kezi{
-            flex:1;
-        }
     }
     .price{
+        height: 182px;
         flex:1;
         font-size: 30px;
-        color:rgb(248, 92, 92);
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        span{
+            color:rgb(248, 92, 92);
+        }
     }
 }
 .order .order-footer-price{
+    width: 100%;
     height: 90px;
     line-height: 90px;
     padding-right: 46px;
-    float:right;
+    text-align: right;
     font-size: 24px;
+    border-top: 1px solid rgb(229, 229, 229);
 }
 .order .order-footer {
     width: 100%;
@@ -685,9 +574,8 @@ export default {
     display: flex;
     justify-content: flex-end;
     padding-right: 46px;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid rgb(229, 229, 229);
     font-size: 30px;    
-    // font-family: "NotoSansHans-Light";
     button{
         width: 200px;
         height: 68px;
@@ -716,13 +604,12 @@ export default {
     font-size: 30px;
     color:rgb(112, 112, 112);
 }
-.price {
-  width: 100%;
-  height: 30px;
-  line-height: 30px;
-  text-align: right;
-  border-top: 1px solid rgb(240, 240, 240);
-}
+// .price {
+//   width: 100%;
+//   height: 30px;
+//   line-height: 30px;
+//   text-align: right;
+// }
 .tabs-contents {
   position: relative;
 }

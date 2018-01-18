@@ -58,10 +58,12 @@ module.exports = {
 
   build: {
     // Template for index.html
-    // index: path.resolve(__dirname, '../dist/index.html'),
+    index: path.resolve(__dirname, '../dist/index.html'),
+    login:path.resolve(__dirname,'../dist/login.html'),
     mall:path.resolve(__dirname,'../dist/mall.html'),
     order:path.resolve(__dirname,'../dist/order.html'),
-
+    delivery:path.resolve(__dirname,'../dist/delivery.html'),
+    glassDetails:path.resolve(__dirname,'../dist/glassDetails.html'),
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',

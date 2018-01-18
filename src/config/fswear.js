@@ -256,7 +256,6 @@ export const Config2Json = (config) => {
         console.log("Config2Json needs input in string type.");
         return;
     }
-    
     config = config.split(/\r?\n/);
     var key;
     var value;
@@ -285,12 +284,11 @@ export const Config2Json = (config) => {
 
 export const glassTypeGenobjMap = async() => {
     let res = await fetchAllConfig();
-    console.log(res);
     let glass_type_genobj_map = {};
     for (let idx in res.config) {
         let config_uuid = res.config[idx];
-        let url2 = baseUrl+"/data?action=download&uuid="+config_uuid+"&type=config";
-        Vue.http.get(url2).then(response => {
+        let url = baseUrl+"/data?action=download&uuid="+config_uuid+"&type=config";
+        await Vue.http.get(url).then(response => {
             let config_json = Config2Json(response.data);
             let glass_type = config_json.LensProfileIdentifier;
             glass_type_genobj_map[glass_type] = res.genobj[idx];
@@ -302,29 +300,63 @@ export const glassTypeGenobjMap = async() => {
 }
 
 export const getFramesObj = async() => {
-
     let frames_obj = [];
+    let obj = {};
     let list_frame_profiles = await listFrameProfiles();
     let frame_profiles_uuid = list_frame_profiles.list[0];
     let res = await queryFrameProfiles(frame_profiles_uuid);
     let frame_profiles = res.description.frame_profiles;
     let glass_type_genobj_map = await glassTypeGenobjMap();
-    
     for(let key in frame_profiles.data){
         let val = frame_profiles.data[key];
-        console.log(val);
-        
         let frame_uuid = glass_type_genobj_map[val];
-        console.log(glass_type_genobj_map);
-        console.log(glass_type_genobj_map.val);
-        
-        console.log(frame_uuid);
-        
-        frames_obj[frame_uuid] = {
+        obj[frame_uuid] = {
             "alias":frame_profiles.alias[key],
             "material":frame_profiles.material[key],
             "frame_type":frame_profiles.data[key]
-        };
+        }
+        frames_obj.push({
+            "frame_uuid":frame_uuid,
+            "alias":frame_profiles.alias[key],
+            "material":frame_profiles.material[key],
+            "frame_type":frame_profiles.data[key]
+        });
     }
-    return frames_obj;
+    return obj;
 }
+
+export const frameProfilesCrop = async () => {
+    let result = null;
+    let arr = [];
+    let res = await listFrameProfiles();
+    let frame_profiles_uuid = res.list[0];
+    let res2 = await queryFrameProfiles(frame_profiles_uuid);
+    // let frame_profiles_img_uuid = res2.content;
+    let frame_profiles = res2.description.frame_profiles;
+    let row_count = frame_profiles.dimensions[1],
+        column_count = frame_profiles.dimensions[0],
+        width = frame_profiles.size[0],
+        height = frame_profiles.size[1],
+        single_width = width / column_count,
+        single_height = height / row_count;
+    for(let i=0; i < row_count; i++){
+        for(let j=0; j < column_count; j++){
+            arr.push({
+                "position-x":i*single_height,
+                "position-y":j*single_width
+            })
+        }
+    }
+    // console.log(frame_profiles_img_uuid);
+    
+    // let url222 = baseUrl+"/common?action=download&uuid="+frame_profiles_img_uuid+"&type=frame_profiles";
+    // await Vue.http.get(url222).then(response => {
+    //     result = response.data;
+    // },response => {
+    //     console.warn(response)
+    // })
+    // return result;
+    return arr;
+}
+
+

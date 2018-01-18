@@ -52,12 +52,19 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
     new webpack.NoEmitOnErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
-    // new HtmlWebpackPlugin({
-    //   filename: 'index.html',
-    //   template: 'index.html',
-    //   inject: true,
-    //   chunks:['app']
-    // }),
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'index.html',
+      inject: true,
+      chunks:['app']
+    }),
+
+    new HtmlWebpackPlugin({
+      filename: 'login.html',
+      template: 'login.html',
+      inject: true,
+      chunks:['login']
+    }),
 
     new HtmlWebpackPlugin({
       filename: 'mall.html',
@@ -70,6 +77,18 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       template: 'order.html',
       inject: true,
       chunks:['order']
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'delivery.html',
+      template: 'delivery.html',
+      inject: true,
+      chunks:['delivery']
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'glassDetails.html',
+      template: 'glassDetails.html',
+      inject: true,
+      chunks:['glassDetails']
     }),
     new FriendlyErrorsPlugin(),
     // copy custom static assets

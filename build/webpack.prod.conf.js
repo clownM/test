@@ -62,11 +62,26 @@ const webpackConfig = merge(baseWebpackConfig, {
     // generate dist index.html with correct asset hash for caching.
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
+    new HtmlWebpackPlugin({
+      filename: process.env.NODE_ENV === 'testing'
+        ? 'index.html'
+        : config.build.index,
+      template: 'index.html',
+      inject: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+        // more options:
+        // https://github.com/kangax/html-minifier#options-quick-reference
+      },
+      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+      chunksSortMode: 'dependency',
+      chunks:['manifest','vendor','app']
+    }),
     // new HtmlWebpackPlugin({
-    //   filename: process.env.NODE_ENV === 'testing'
-    //     ? 'index.html'
-    //     : config.build.index,
-    //   template: 'index.html',
+    //   filename: config.build.login,
+    //   template: 'login.html',
     //   inject: true,
     //   minify: {
     //     removeComments: true,
@@ -77,8 +92,9 @@ const webpackConfig = merge(baseWebpackConfig, {
     //   },
     //   // necessary to consistently work with multiple chunks via CommonsChunkPlugin
     //   chunksSortMode: 'dependency',
-    //   chunks:['manifest','vendor','app']
+    //   chunks:['manifest','vendor','login']
     // }),
+
     new HtmlWebpackPlugin({
       filename: config.build.mall,
       template: 'mall.html',
@@ -108,6 +124,36 @@ const webpackConfig = merge(baseWebpackConfig, {
       // necessary to consistently work with multiple chunks via CommonsChunkPlugin
       chunksSortMode: 'dependency',
       chunks:['manifest','vendor','order']
+    }),
+    new HtmlWebpackPlugin({
+      filename: config.build.delivery,
+      template: 'delivery.html',
+      inject: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+        // more options:
+        // https://github.com/kangax/html-minifier#options-quick-reference
+      },
+      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+      chunksSortMode: 'dependency',
+      chunks:['manifest','vendor','delivery']
+    }),
+    new HtmlWebpackPlugin({
+      filename: config.build.glassDetails,
+      template: 'glassDetails.html',
+      inject: true,
+      minify: {
+        removeComments: true,
+        collapseWhitespace: true,
+        removeAttributeQuotes: true
+        // more options:
+        // https://github.com/kangax/html-minifier#options-quick-reference
+      },
+      // necessary to consistently work with multiple chunks via CommonsChunkPlugin
+      chunksSortMode: 'dependency',
+      chunks:['manifest','vendor','glassDetails']
     }),
 
     // keep module.id stable when vendor modules does not change
