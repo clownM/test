@@ -27,7 +27,9 @@ module.exports = {
     order: './src/pages/order/order.js',
     login: './src/pages/login/login.js',
     delivery: './src/pages/delivery/delivery.js',
-    glassDetails: './src/pages/glassDetails/glassDetails.js'
+    glassDetails: './src/pages/glassDetails/glassDetails.js',
+    address: './src/pages/address/address.js',
+    addAddress: './src/pages/addAddress/addAddress.js'
   },
   output: {
     path: config.build.assetsRoot,

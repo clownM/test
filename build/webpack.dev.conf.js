@@ -90,6 +90,18 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       inject: true,
       chunks:['glassDetails']
     }),
+    new HtmlWebpackPlugin({
+      filename: 'address.html',
+      template: 'address.html',
+      inject: true,
+      chunks:['address']
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'addAddress.html',
+      template: 'addAddress.html',
+      inject: true,
+      chunks:['addAddress']
+    }),
     new FriendlyErrorsPlugin(),
     // copy custom static assets
     new CopyWebpackPlugin([

@@ -1,7 +1,7 @@
-    <template>
+<template>
     <section class="top-fixed">
         <div class="go-back">
-            <img src="../img/icon/arrow-right.png" alt="" class='icon-back'>
+            <img src="../img/icon/arrow-left@3x.png" alt="" class='icon-back'>
             <b>{{ title }}</b>
         </div>
     </section>

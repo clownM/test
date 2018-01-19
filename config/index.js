@@ -64,6 +64,8 @@ module.exports = {
     order:path.resolve(__dirname,'../dist/order.html'),
     delivery:path.resolve(__dirname,'../dist/delivery.html'),
     glassDetails:path.resolve(__dirname,'../dist/glassDetails.html'),
+    address:path.resolve(__dirname,'../dist/address.html'),
+    addAddress:path.resolve(__dirname,'../dist/addAddress.html'),
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
